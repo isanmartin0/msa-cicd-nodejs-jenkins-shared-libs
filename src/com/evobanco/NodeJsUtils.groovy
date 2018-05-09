@@ -10,15 +10,15 @@ def getBranchType(String branchName) {
     def master_pattern = "master"
 
     if (branchName ==~ dev_pattern) {
-        return Constants.BRANCH_TYPE_DEVELOP
+        return NodejsConstants.BRANCH_TYPE_DEVELOP
     } else if (branchName ==~ release_pattern) {
-        return Constants.BRANCH_TYPE_RELEASE
+        return NodejsConstants.BRANCH_TYPE_RELEASE
     } else if (branchName ==~ master_pattern) {
-        return Constants.BRANCH_TYPE_MASTER
+        return NodejsConstants.BRANCH_TYPE_MASTER
     } else if (branchName ==~ feature_pattern) {
-        return Constants.BRANCH_TYPE_FEATURE
+        return NodejsConstants.BRANCH_TYPE_FEATURE
     } else if (branchName ==~ hotfix_pattern) {
-        return Constants.BRANCH_TYPE_HOTFIX
+        return NodejsConstants.BRANCH_TYPE_HOTFIX
     } else {
         return null
     }

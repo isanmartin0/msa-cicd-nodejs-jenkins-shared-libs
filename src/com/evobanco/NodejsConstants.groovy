@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 package com.evobanco
 
-class Constants {
+class NodejsConstants {
 
     static final BRANCH_TYPE_DEVELOP = 'develop'
     static final BRANCH_TYPE_FEATURE = 'feature'
