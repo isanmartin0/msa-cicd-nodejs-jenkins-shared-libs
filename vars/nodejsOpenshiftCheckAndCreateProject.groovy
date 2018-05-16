@@ -58,6 +58,6 @@ def call(body) {
                     "SOURCE_REPOSITORY_BRANCH=${config.sourceRepositoryBranch} NPM_MIRROR=${config.npmMirror} NODEJS_VERSION=${config.nodejsVersion} envLabel=${config.environment} HOST_NAME=${hostname} MIN_POD_REPLICAS=${minimumPodReplicas} MAX_POD_REPLICAS=${maximumPodReplicas}| oc create -n ${projectName} -f -"
         }
 
-        echo "Resources (is,bc,dc,svc,secret,route) created under OCP namespace ${projectName}"
+        echo "Resources (is,bc,dc,svc,route) created under OCP namespace ${projectName}"
     }
 }
