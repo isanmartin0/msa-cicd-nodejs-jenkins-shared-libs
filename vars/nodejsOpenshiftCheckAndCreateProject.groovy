@@ -11,18 +11,18 @@ def call(body) {
     def project = "${packageJSON.name}"
     def projectName
     def branchNameContainerImage = ""
-    int minimumPodReplicas = Constants.MINIMUM_POD_REPLICAS
-    int maximumPodReplicas = Constants.MAXIMUM_POD_REPLICAS
+    int minimumPodReplicas = NodejsConstants.MINIMUM_POD_REPLICAS
+    int maximumPodReplicas = NodejsConstants.MAXIMUM_POD_REPLICAS
     def hostname = ""
     if (config.branch_type == 'master') {
     	projectName = "${packageJSON.name}"
 
         //Host name for the route element
-        hostname = ".svcs" + Constants.HOSTNAME_DOMAIN
+        hostname = ".svcs" + NodejsConstants.HOSTNAME_DOMAIN
 
         //Set minimum number of replicas of pod
-        minimumPodReplicas = Constants.MINIMUM_POD_REPLICAS_PRO_ENVIRONMENT
-        maximumPodReplicas = Constants.MAXIMUM_POD_REPLICAS_PRO_ENVIRONMENT
+        minimumPodReplicas = NodejsConstants.MINIMUM_POD_REPLICAS_PRO_ENVIRONMENT
+        maximumPodReplicas = NodejsConstants.MAXIMUM_POD_REPLICAS_PRO_ENVIRONMENT
 
     } else {
     	projectName = "${packageJSON.name}-${config.branchHY}"
@@ -30,7 +30,7 @@ def call(body) {
         //Branch name for image container
         branchNameContainerImage = "-${config.branchHY}"
         //Host name for the route element
-        hostname = "-${config.branchHY}.svcs${config.environment}" + Constants.HOSTNAME_DOMAIN
+        hostname = "-${config.branchHY}.svcs${config.environment}" + NodejsConstants.HOSTNAME_DOMAIN
     }
 
     withCredentials([usernamePassword(credentialsId: "${config.oseCredential}", passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
