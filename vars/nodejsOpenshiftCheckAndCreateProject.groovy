@@ -53,9 +53,7 @@ def call(body) {
         sh "oc project ${projectName}"
 
         withCredentials([string(credentialsId: "${config.artCredential}", variable: 'ARTIFACTORY_TOKEN')]) {
-            sh "oc process -n ${projectName} -f ${config.template} BRANCH_NAME=${env.BRANCH_NAME} BRANCH_NAME_HY=${config.branchHY} BRANCH_NAME_HY_CONTAINER_IMAGE=${branchNameContainerImage} " +
-                    "PROJECT=${project} DOCKER_REGISTRY=${config.dockerRegistry} ARTIFACTORY_TOKEN=${ARTIFACTORY_TOKEN} SOURCE_REPOSITORY_URL=${config.sourceRepositoryURL} " +
-                    "SOURCE_REPOSITORY_BRANCH=${config.sourceRepositoryBranch} NPM_MIRROR=${config.npmMirror} NODEJS_VERSION=${config.nodejsVersion} envLabel=${config.environment} HOST_NAME=${hostname} MIN_POD_REPLICAS=${minimumPodReplicas} MAX_POD_REPLICAS=${maximumPodReplicas}| oc create -n ${projectName} -f -"
+            sh "oc process -n ${projectName} -f ${config.template} BRANCH_NAME=${env.BRANCH_NAME} BRANCH_NAME_HY=${config.branchHY} BRANCH_NAME_HY_CONTAINER_IMAGE=${branchNameContainerImage} PROJECT=${project} DOCKER_REGISTRY=${config.dockerRegistry} ARTIFACTORY_TOKEN=${ARTIFACTORY_TOKEN} SOURCE_REPOSITORY_URL=${config.sourceRepositoryURL} SOURCE_REPOSITORY_BRANCH=${config.sourceRepositoryBranch} NPM_MIRROR=${config.npmMirror} NODEJS_VERSION=${config.nodejsVersion} envLabel=${config.environment} HOST_NAME=${hostname} MIN_POD_REPLICAS=${minimumPodReplicas} MAX_POD_REPLICAS=${maximumPodReplicas}| oc create -n ${projectName} -f -"
         }
 
         echo "Resources (is,bc,dc,svc,route) created under OCP namespace ${projectName}"
