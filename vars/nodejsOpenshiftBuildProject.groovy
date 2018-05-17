@@ -1,9 +1,7 @@
 #!/usr/bin/groovy
-import com.evobanco.Utils
 
 def call(body) {
 
-    def utils = new com.evobanco.Utils()
     def config = [:]
     body.resolveStrategy = Closure.DELEGATE_FIRST
     body.delegate = config
