@@ -9,6 +9,9 @@ def call(body) {
     body.delegate = config
     body()
 
+
+    echo "config.repoUrl: ${config.repoUrl}"
+
     def packageJSON = readJSON file: 'package.json'
     def project = "${packageJSON.name}"
     def projectName
