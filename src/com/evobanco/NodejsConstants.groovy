@@ -28,6 +28,13 @@ class NodejsConstants {
     static final UNSTABLE_BUILD_RESULT = 'UNSTABLE'
 
 
+    static final PORT_ENVIRONMENT_VARIABLE = 'PORT'
+    static final DEV_MODE_ENVIRONMENT_VARIABLE = 'DEV_MODE'
+    static final NPM_RUN_ENVIRONMENT_VARIABLE = 'NPM_RUN'
+    static final NPM_MIRROR_ENVIRONMENT_VARIABLE = 'NPM_MIRROR'
+    static final DEBUG_PORT_ENVIRONMENT_VARIABLE = 'DEBUG_PORT'
+
+
 
 
 }
