@@ -9,7 +9,7 @@ def call(body) {
     body()
 
     Boolean isCreatePortEnvironmentVariable = false
-    Boolean isDevMode = false
+    Boolean isDevModeOpenshift = false
     Boolean isUseNpmMirrorOpenshift = false
     Boolean isUseAlternateNpmRunOpenshift = false
 
@@ -17,7 +17,7 @@ def call(body) {
 
     def createPortEnvironmentVariable = config.createPortEnvironmentVariableOpenshift
     def portNumber = config.portNumber
-    def devMode = config.devMode
+    def devModeOpenshift = config.devMode
     def debugPort = config.debugPort
     def useNpmMirrorOpenshift = config.useNpmMirror
     def npmMirror = config.npmMirror
@@ -28,7 +28,7 @@ def call(body) {
 
     echo "createPortEnvironmentVariable: ${createPortEnvironmentVariable}"
     echo "portNumber: ${portNumber}"
-    echo "devMode: ${devMode}"
+    echo "devModeOpenshift: ${devModeOpenshift}"
     echo "debugPort: ${debugPort}"
     echo "useNpmMirrorOpenshift: ${useNpmMirrorOpenshift}"
     echo "npmMirror: ${npmMirror}"
@@ -54,8 +54,8 @@ def call(body) {
         isCreatePortEnvironmentVariable = createPortEnvironmentVariable.toBoolean()
     }
 
-    if (devMode != null) {
-        isDevMode = devMode.toBoolean()
+    if (devModeOpenshift != null) {
+        isDevModeOpenshift = devModeOpenshift.toBoolean()
     }
 
     if (useNpmMirrorOpenshift != null) {
@@ -80,7 +80,7 @@ def call(body) {
 
     }
 
-    if (isDevMode) {
+    if (isDevModeOpenshift) {
         try {
             echo "Removing DEBUG_PORT environment variable"
             sh "oc env dc/${project} ${NodejsConstants.DEBUG_PORT_ENVIRONMENT_VARIABLE}- -n ${projectName}"
