@@ -7,6 +7,17 @@ def call(body) {
     body.delegate = config
     body()
 
+    echo "Parameters nodejsOpenshiftCheckAndCreateProject"
+    echo "config.template: ${config.template}"
+    echo "config.environment: ${config.environment}"
+    echo "config.branchHY: ${config.branchHY}"
+    echo "config.dockerRegistry: ${config.dockerRegistry}"
+    echo "config.sourceRepositoryURL: ${config.sourceRepositoryURL}"
+    echo "config.sourceRepositoryBranch: ${config.sourceRepositoryBranch}"
+    echo "config.npmMirror: ${config.npmMirror}"
+    echo "config.nodejsVersion: ${config.nodejsVersion}"
+    echo "config.environment: ${config.environment}"
+
     def packageJSON = readJSON file: 'package.json'
     def project = "${packageJSON.name}"
     def projectName
