@@ -48,7 +48,6 @@ def call(body) {
         projectName = "${packageJSON.name}-${branchNameHY}"
     }
 
-    echo "Creating environment variables"
 
     if (createPortEnvironmentVariable != null) {
         isCreatePortEnvironmentVariable = createPortEnvironmentVariable.toBoolean()
@@ -66,6 +65,7 @@ def call(body) {
         isUseAlternateNpmRunScript = useAlternateNpmRun.toBoolean()
     }
 
+/*
     if (isCreatePortEnvironmentVariable) {
         try {
             //Remove PORT environment variable created by template
@@ -129,7 +129,7 @@ def call(body) {
         sh "oc env dc/${project} ${NodejsConstants.NPM_RUN_ENVIRONMENT_VARIABLE}=${alternateNpmRunScript} -n ${projectName}"
 
     }
-
+*/
 
 
 
