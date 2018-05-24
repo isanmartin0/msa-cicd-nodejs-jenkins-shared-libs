@@ -43,4 +43,33 @@ def String getParallelConfigurationProjectURL(String projectURL, String moduleNa
     }
 }
 
+def boolean isScopedPackage(String packageName) {
+    if (packageName == null || "".equals(packageName)) {
+        return false
+    } else if (packageName.trim().startsWith("@") && packageName.trim().contains("/")) {
+        return true
+    } else {
+        return false
+    }
+}
 
+def getPackageScope(String packageName) {
+    def packageScope = ""
+    if (isScopedPackage(packageName)) {
+        packageScope = packageName.substring(packageName.indexOf('@'), packageName.indexOf('/'))
+    } else {
+        throw new Exception("is not a scoped package")
+    }
+    return packageScope
+}
+
+def getPackageTag(String packageName, String packageVersion) {
+
+    def packageTag = ""
+    if (packageName == null || "".equals(packageName) || packageVersion == null || "".equals(packageVersion)) {
+        return ""
+    } else {
+        packageTag = packageName.trim() + "@" + packageVersion.trim()
+    }
+    return packageTag
+}
