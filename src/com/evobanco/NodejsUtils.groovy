@@ -73,3 +73,28 @@ def getPackageTag(String packageName, String packageVersion) {
     }
     return packageTag
 }
+
+def getPackageTarball(String packageName, String packageVersion) {
+
+    def packageTarball = ""
+    def tarballSufix = ".tgz"
+    if (packageName == null || "".equals(packageName) || packageVersion == null || "".equals(packageVersion)) {
+        return ""
+    } else {
+        packageTarball = packageName.trim() + "-" + packageVersion.trim() + tarballSufix
+    }
+    return packageTarball
+}
+
+
+def getPackageTarball(String packageTag) {
+
+    def packageTarball = ""
+    def tarballSufix = ".tgz"
+    if (packageTag == null || "".equals(packageTag)) {
+        return ""
+    } else {
+        packageTarball = packageTag.trim().replace("@","-") + tarballSufix
+    }
+    return packageTarball
+}
