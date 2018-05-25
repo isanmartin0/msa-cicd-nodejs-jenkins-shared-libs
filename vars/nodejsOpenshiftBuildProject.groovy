@@ -10,6 +10,7 @@ def call(body) {
     echo "nodejsOpenshiftBuildProject parameters"
     echo "config.repoUrl: ${config.repoUrl}"
     echo "config.package_tag: ${config.package_tag}"
+    echo "config.package_tarball: ${config.package_tarball}"
     echo "config.is_scoped_package: ${config.is_scoped_package}"
 
     def packageJSON = readJSON file: 'package.json'
@@ -24,7 +25,7 @@ def call(body) {
     def version = packageJSON.version
 
     def artifactUrl = "${config.repoUrl}/${packageJSON.name}/${version}/${packageJSON.name}-${version}.tgz"
-    def buildEnvVars = [ [ name : 'WAR_FILE_URL', value : artifactUrl ], [ name: 'PACKAGE_TAG', value: config.package_tag], [ name: 'IS_SCOPED_PACKAGE', value: config.is_scoped_package]]
+    def buildEnvVars = [ [ name : 'WAR_FILE_URL', value : artifactUrl ], [ name: 'PACKAGE_TAG', value: config.package_tag], [ name: 'PACKAGE_TARBALL', value: config.package_tarball], [ name: 'IS_SCOPED_PACKAGE', value: config.is_scoped_package]]
 
     openshiftBuild buildConfig: project, namespace: projectName, verbose: 'true', showBuildLogs: 'true', env: buildEnvVars
 
