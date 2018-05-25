@@ -7,7 +7,7 @@ def call(body) {
     body.delegate = config
     body()
 
-
+    echo "nodejsOpenshiftBuildProject parameters"
     echo "config.repoUrl: ${config.repoUrl}"
     echo "config.package_tag: ${config.package_tag}"
     echo "config.is_scoped_package: ${config.is_scoped_package}"

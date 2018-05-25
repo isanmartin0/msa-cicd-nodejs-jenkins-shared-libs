@@ -7,6 +7,7 @@ def call(body) {
     body.delegate = config
     body()
 
+    echo "nodejsOpenshiftCheckAndCreateProject parameters"
     echo "Parameters nodejsOpenshiftCheckAndCreateProject"
     echo "config.template: ${config.template}"
     echo "config.environment: ${config.environment}"

@@ -26,6 +26,7 @@ def call(body) {
     def branchNameHY = config.branchHY
     def branchType = config.branch_type
 
+    echo "nodejsOpenshiftEnvironmentVariables parameters"
     echo "createPortEnvironmentVariable: ${createPortEnvironmentVariable}"
     echo "portNumber: ${portNumber}"
     echo "devMode: ${devMode}"
