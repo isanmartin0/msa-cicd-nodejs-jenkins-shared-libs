@@ -22,6 +22,10 @@ class NodejsConstants {
     static final HTTP_PROTOCOL = 'http://'
     static final HTTPS_PROTOCOL = 'https://'
 
+    static final SMOKE_TEST_TYPE = 'Smoke'
+    static final ACCEPTANCE_TEST_TYPE = 'Acceptance'
+    static final SECURITY_TEST_TYPE = 'Security'
+    static final PERFORMANCE_TEST_TYPE = 'Performance'
 
     static final SUCCESS_BUILD_RESULT = 'SUCCESS'
     static final FAILURE_BUILD_RESULT = 'FAILURE'
