@@ -98,3 +98,21 @@ def getPackageTarball(String packageTag) {
     }
     return packageTarball
 }
+
+def getRouteHostnameWithProtocol(String routeHostname, boolean isSecuredRoute) {
+
+    def routeHostNameWithProtocol = ''
+    if (routeHostname != null && !"".equals(routeHostname)) {
+        if (!routeHostname.toLowerCase().startsWith(Constants.HTTP_PROTOCOL) && !routeHostname.toLowerCase().startsWith(Constants.HTTPS_PROTOCOL)) {
+            if (isSecuredRoute) {
+                routeHostNameWithProtocol = Constants.HTTPS_PROTOCOL + routeHostname
+            } else {
+                routeHostNameWithProtocol = Constants.HTTP_PROTOCOL + routeHostname
+            }
+        } else {
+            routeHostNameWithProtocol = routeHostname
+        }
+    }
+
+    return routeHostNameWithProtocol
+}
