@@ -33,14 +33,16 @@ def getBranch(){
 }
 
 
-def String getParallelConfigurationProjectURL(String projectURL, String moduleName) {
+def String getParallelConfigurationProjectURL(String projectURL) {
 
     def ppc_extension = "-ppc";
-    if (projectURL == null || "".equals(projectURL) || moduleName == null || "".equals(moduleName)) {
-        return ""
-    } else {
-        projectURL.substring(0, projectURL.lastIndexOf("/") + 1) + moduleName + ppc_extension
+    def parallelProject = ""
+
+    if (projectURL != null && !"".equals(projectURL)) {
+        parallelProject = projectURL + ppc_extension
     }
+
+    return parallelProject
 }
 
 def boolean isScopedPackage(String packageName) {
