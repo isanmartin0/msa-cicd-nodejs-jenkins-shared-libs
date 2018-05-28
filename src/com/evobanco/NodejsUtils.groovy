@@ -105,11 +105,11 @@ def getRouteHostnameWithProtocol(String routeHostname, boolean isSecuredRoute) {
 
     def routeHostNameWithProtocol = ''
     if (routeHostname != null && !"".equals(routeHostname)) {
-        if (!routeHostname.toLowerCase().startsWith(Constants.HTTP_PROTOCOL) && !routeHostname.toLowerCase().startsWith(Constants.HTTPS_PROTOCOL)) {
+        if (!routeHostname.toLowerCase().startsWith(NodejsConstants.HTTP_PROTOCOL) && !routeHostname.toLowerCase().startsWith(NodejsConstants.HTTPS_PROTOCOL)) {
             if (isSecuredRoute) {
-                routeHostNameWithProtocol = Constants.HTTPS_PROTOCOL + routeHostname
+                routeHostNameWithProtocol = NodejsConstants.HTTPS_PROTOCOL + routeHostname
             } else {
-                routeHostNameWithProtocol = Constants.HTTP_PROTOCOL + routeHostname
+                routeHostNameWithProtocol = NodejsConstants.HTTP_PROTOCOL + routeHostname
             }
         } else {
             routeHostNameWithProtocol = routeHostname
