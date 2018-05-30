@@ -8,7 +8,6 @@ def call(body) {
     body()
 
     echo "nodejsOpenshiftCheckAndCreateProject parameters"
-    echo "Parameters nodejsOpenshiftCheckAndCreateProject"
     echo "config.template: ${config.template}"
     echo "config.environment: ${config.environment}"
     echo "config.branchHY: ${config.branchHY}"
