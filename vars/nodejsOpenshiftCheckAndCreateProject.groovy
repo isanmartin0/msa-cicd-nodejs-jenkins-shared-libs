@@ -21,6 +21,7 @@ def call(body) {
     echo "config.package_tag: ${config.package_tag}"
     echo "config.package_tarball: ${config.package_tarball}"
     echo "config.is_scoped_package: ${config.is_scoped_package}"
+    echo "config.portNumber: ${config.portNumber}"
 
     def packageJSON = readJSON file: 'package.json'
     def project = "${packageJSON.name}"
