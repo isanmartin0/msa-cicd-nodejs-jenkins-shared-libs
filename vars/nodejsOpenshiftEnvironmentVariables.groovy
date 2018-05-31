@@ -25,6 +25,7 @@ def call(body) {
     def alternateNpmRunScript = config.alternateNpmRunScriptOpenshift
     def branchNameHY = config.branchHY
     def branchType = config.branch_type
+    def mapEnvironmentVariables = config.map_environment_variables
 
     echo "nodejsOpenshiftEnvironmentVariables parameters"
     echo "createPortEnvironmentVariable: ${createPortEnvironmentVariable}"
@@ -38,9 +39,11 @@ def call(body) {
     echo "branchNameHY: ${branchNameHY}"
     echo "branchType: ${branchType}"
 
+    echo "mapEnvironmentVariables:"
+    mapEnvironmentVariables.each { key, value ->
+        echo "Environment variable: ${key} = ${value}"
+    }
 
-
-    def mapEnvironmentVariables = ["ENVIR_1" : "XXX", "ENVIR_2" : 2, "ENVIR_3" : true]
 
     def packageJSON = readJSON file: 'package.json'
     def project = "${packageJSON.name}"
@@ -135,7 +138,6 @@ def call(body) {
     }
 
     mapEnvironmentVariables.each { key, value ->
-        println "Name: $key Age: $value"
         try {
             echo "Removing $key environment variable"
             sh "oc env dc/${project} $key- -n ${projectName}"
