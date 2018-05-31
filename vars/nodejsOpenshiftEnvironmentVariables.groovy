@@ -134,7 +134,8 @@ def call(body) {
 
     }
 
-    map.each { key, value ->
+    mapEnvironmentVariables.each { key, value ->
+        println "Name: $key Age: $value"
         try {
             echo "Removing $key environment variable"
             sh "oc env dc/${project} $key- -n ${projectName}"
@@ -145,10 +146,6 @@ def call(body) {
         echo "Adding $key=$value environment variable"
         sh "oc env dc/${project} $key=$value -n ${projectName}"
 
-
-
-
-        println "Name: $key Age: $value"
     }
 
 
