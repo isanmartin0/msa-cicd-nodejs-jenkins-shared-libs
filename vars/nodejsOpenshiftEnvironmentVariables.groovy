@@ -39,6 +39,9 @@ def call(body) {
     echo "branchType: ${branchType}"
 
 
+
+    def mapEnvironmentVariables = ["ENVIR_1" : "XXX", "ENVIR_2" : 2, "ENVIR_3" : true]
+
     def packageJSON = readJSON file: 'package.json'
     def project = "${packageJSON.name}"
 
@@ -129,6 +132,23 @@ def call(body) {
         echo "Adding ${NodejsConstants.NPM_RUN_ENVIRONMENT_VARIABLE}=${alternateNpmRunScript} environment variable"
         sh "oc env dc/${project} ${NodejsConstants.NPM_RUN_ENVIRONMENT_VARIABLE}=${alternateNpmRunScript} -n ${projectName}"
 
+    }
+
+    map.each { key, value ->
+        try {
+            echo "Removing $key environment variable"
+            sh "oc env dc/${project} $key- -n ${projectName}"
+        } catch (err) {
+            echo "The $key environment variable on dc/${project} -n ${projectName} cannot be removed"
+        }
+
+        echo "Adding $key=$value environment variable"
+        sh "oc env dc/${project} $key=$value -n ${projectName}"
+
+
+
+
+        println "Name: $key Age: $value"
     }
 
 
