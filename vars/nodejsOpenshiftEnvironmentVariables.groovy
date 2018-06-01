@@ -87,6 +87,7 @@ def call(body) {
 
     }
 
+/*
     if (isDevMode) {
         try {
             echo "Removing DEBUG_PORT environment variable"
@@ -136,6 +137,8 @@ def call(body) {
         sh "oc env dc/${project} ${NodejsConstants.NPM_RUN_ENVIRONMENT_VARIABLE}=${alternateNpmRunScript} -n ${projectName}"
 
     }
+
+*/
 
     mapEnvironmentVariables.each { key, value ->
         try {
