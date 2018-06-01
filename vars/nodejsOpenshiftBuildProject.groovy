@@ -1,4 +1,5 @@
 #!/usr/bin/groovy
+import com.evobanco.NodejsConstants
 
 def call(body) {
 
@@ -63,7 +64,16 @@ def call(body) {
     echo "buildEnvVars.size: ${buildEnvVars.size()}"
 
     if (isDevMode) {
-        buildEnvVars <<  [ name : 'DEV_MODE', value : isDevMode ]
+        buildEnvVars <<  [ name : ${NodejsConstants.DEV_MODE_ENVIRONMENT_VARIABLE}, value : isDevMode ]
+        buildEnvVars <<  [ name : ${NodejsConstants.DEBUG_PORT_ENVIRONMENT_VARIABLE}, value : debugPort ]
+    }
+
+    if (isUseNpmMirror) {
+        buildEnvVars <<  [ name : ${NodejsConstants.NPM_MIRROR_ENVIRONMENT_VARIABLE}, value : npmMirror ]
+    }
+
+    if (isUseAlternateNpmRunScript) {
+        buildEnvVars <<  [ name : ${NodejsConstants.NPM_RUN_ENVIRONMENT_VARIABLE}, value : alternateNpmRunScript ]
     }
 
     echo "buildEnvVars.size: ${buildEnvVars.size()}"
