@@ -22,6 +22,7 @@ def call(body) {
     echo "config.is_scoped_package: ${config.is_scoped_package}"
     echo "config.portNumber: ${config.portNumber}"
 
+
     def packageJSON = readJSON file: 'package.json'
     def project = "${packageJSON.name}"
     def projectName
