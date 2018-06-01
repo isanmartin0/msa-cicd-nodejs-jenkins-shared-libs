@@ -87,59 +87,6 @@ def call(body) {
 
     }
 
-/*
-    if (isDevMode) {
-        try {
-            echo "Removing DEBUG_PORT environment variable"
-            sh "oc env dc/${project} ${NodejsConstants.DEBUG_PORT_ENVIRONMENT_VARIABLE}- -n ${projectName}"
-        } catch (err) {
-            echo "The ${NodejsConstants.DEBUG_PORT_ENVIRONMENT_VARIABLE} environment variable on dc/${project} -n ${projectName} cannot be removed"
-        }
-
-        echo "Adding ${NodejsConstants.DEBUG_PORT_ENVIRONMENT_VARIABLE}=${debugPort} environment variable"
-        sh "oc env dc/${project} ${NodejsConstants.DEBUG_PORT_ENVIRONMENT_VARIABLE}=${debugPort} -n ${projectName}"
-
-
-        try {
-            echo "Removing DEV_MODE environment variable"
-            sh "oc env dc/${project} ${NodejsConstants.DEV_MODE_ENVIRONMENT_VARIABLE}- -n ${projectName}"
-        } catch (err) {
-            echo "The ${NodejsConstants.DEV_MODE_ENVIRONMENT_VARIABLE} environment variable on dc/${project} -n ${projectName} cannot be removed"
-        }
-
-        echo "Adding ${NodejsConstants.DEV_MODE_ENVIRONMENT_VARIABLE}=${devMode} environment variable"
-        sh "oc env dc/${project} ${NodejsConstants.DEV_MODE_ENVIRONMENT_VARIABLE}=${devMode} -n ${projectName}"
-
-    }
-
-    if (isUseNpmMirror) {
-        try {
-            echo "Removing NPM_MIRROR environment variable"
-            sh "oc env dc/${project} ${NodejsConstants.NPM_MIRROR_ENVIRONMENT_VARIABLE}- -n ${projectName}"
-        } catch (err) {
-            echo "The ${NodejsConstants.NPM_MIRROR_ENVIRONMENT_VARIABLE} environment variable on dc/${project} -n ${projectName} cannot be removed"
-        }
-
-        echo "Adding ${NodejsConstants.NPM_MIRROR_ENVIRONMENT_VARIABLE}=${npmMirror} environment variable"
-        sh "oc env dc/${project} ${NodejsConstants.NPM_MIRROR_ENVIRONMENT_VARIABLE}=${npmMirror} -n ${projectName}"
-
-    }
-
-    if (isUseAlternateNpmRunScript) {
-        try {
-            echo "Removing NPM_RUN environment variable"
-            sh "oc env dc/${project} ${NodejsConstants.NPM_RUN_ENVIRONMENT_VARIABLE}- -n ${projectName}"
-        } catch (err) {
-            echo "The ${NodejsConstants.NPM_RUN_ENVIRONMENT_VARIABLE} environment variable on dc/${project} -n ${projectName} cannot be removed"
-        }
-
-        echo "Adding ${NodejsConstants.NPM_RUN_ENVIRONMENT_VARIABLE}=${alternateNpmRunScript} environment variable"
-        sh "oc env dc/${project} ${NodejsConstants.NPM_RUN_ENVIRONMENT_VARIABLE}=${alternateNpmRunScript} -n ${projectName}"
-
-    }
-
-*/
-
     mapEnvironmentVariables.each { key, value ->
         try {
             echo "Removing $key environment variable"
