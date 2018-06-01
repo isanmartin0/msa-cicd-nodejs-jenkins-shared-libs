@@ -64,16 +64,16 @@ def call(body) {
     echo "buildEnvVars.size: ${buildEnvVars.size()}"
 
     if (isDevMode) {
-        buildEnvVars <<  [ name : ${NodejsConstants.DEV_MODE_ENVIRONMENT_VARIABLE}, value : isDevMode ]
-        buildEnvVars <<  [ name : ${NodejsConstants.DEBUG_PORT_ENVIRONMENT_VARIABLE}, value : debugPort ]
+        buildEnvVars <<  [ name : NodejsConstants.DEV_MODE_ENVIRONMENT_VARIABLE, value : isDevMode ]
+        buildEnvVars <<  [ name : NodejsConstants.DEBUG_PORT_ENVIRONMENT_VARIABLE, value : debugPort ]
     }
 
     if (isUseNpmMirror) {
-        buildEnvVars <<  [ name : ${NodejsConstants.NPM_MIRROR_ENVIRONMENT_VARIABLE}, value : npmMirror ]
+        buildEnvVars <<  [ name : NodejsConstants.NPM_MIRROR_ENVIRONMENT_VARIABLE, value : npmMirror ]
     }
 
     if (isUseAlternateNpmRunScript) {
-        buildEnvVars <<  [ name : ${NodejsConstants.NPM_RUN_ENVIRONMENT_VARIABLE}, value : alternateNpmRunScript ]
+        buildEnvVars <<  [ name : NodejsConstants.NPM_RUN_ENVIRONMENT_VARIABLE, value : alternateNpmRunScript ]
     }
 
     echo "buildEnvVars.size: ${buildEnvVars.size()}"
