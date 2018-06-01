@@ -63,7 +63,7 @@ def call(body) {
     echo "buildEnvVars.size: ${buildEnvVars.size()}"
 
     if (isDevMode) {
-        buildEnvVars << [ [ name : 'DEV_MODE', value : isDevMode ]]
+        buildEnvVars <<  [ name : 'DEV_MODE', value : isDevMode ]
     }
 
     echo "buildEnvVars.size: ${buildEnvVars.size()}"
