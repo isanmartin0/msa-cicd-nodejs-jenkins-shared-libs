@@ -25,5 +25,37 @@ def call(body) {
     def test_files_location = taurus_test_base_path + acceptance_test_path + '**/*.yml'
     echo "Searching ${performance_test_type} tests with pattern: ${test_files_location}"
 
-    //TODO: Complete global variable
+    def files = findFiles(glob: test_files_location)
+
+    def testFilesNumber = files.length
+    echo "${performance_test_type} test files found number: ${testFilesNumber}"
+
+    files.eachWithIndex { file, index ->
+
+        def isDirectory = files[index].directory
+
+        if (!isDirectory) {
+            echo "Executing ${performance_test_type} test file number #${index}: ${files[index].path}"
+
+            echo "Setting taurus scenarios.scenario-default.default-address to ${openshift_route_hostname_with_protocol}"
+            echo "Setting taurus modules.gatling.java-opts to ${openshift_route_hostname_with_protocol}"
+
+            def bztScript = 'bzt -o scenarios.scenario-default.default-address=' + openshift_route_hostname_with_protocol + ' -o modules.gatling.java-opts=-Ddefault-address=' + openshift_route_hostname_with_protocol + ' ' + files[index].path  + ' -report --option=modules.console.disable=true'
+
+            try {
+                echo "Executing script ${bztScript}"
+                sh "${bztScript}"
+            } catch (exc) {
+                isErrorTestStage = true
+                echo "There is an error executing ${performance_test_type} test"
+                def exc_message = exc.message
+                echo "${exc_message}"
+            }
+        }
+    }
+
+    if (isErrorTestStage) {
+        echo "${performance_test_type} tests have caused an unstable result to build"
+        sh "exit 1"
+    }
 }
