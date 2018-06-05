@@ -70,8 +70,8 @@ def call(body) {
 
         sh "oc project ${projectName}"
 
-        withCredentials([string(credentialsId: "${artifactoryNPMAuthCredential}", variable: 'ARTIFACTORY_NPM_AUTH')]) {
-            withCredentials([string(credentialsId: "${artifactoryNPMEmailAuthCredential}", variable: 'ARTIFACTORY_NPM_EMAIL_AUTH')]) {
+        withCredentials([string(credentialsId: "${config.artifactoryNPMAuthCredential}", variable: 'ARTIFACTORY_NPM_AUTH')]) {
+            withCredentials([string(credentialsId: "${config.artifactoryNPMEmailAuthCredential}", variable: 'ARTIFACTORY_NPM_EMAIL_AUTH')]) {
                 sh "oc process -n ${projectName} -f ${config.template} BRANCH_NAME=${env.BRANCH_NAME} BRANCH_NAME_HY=${config.branchHY} BRANCH_NAME_HY_CONTAINER_IMAGE=${branchNameContainerImage} PROJECT=${project} DOCKER_REGISTRY=${config.dockerRegistry} SOURCE_REPOSITORY_URL=${config.sourceRepositoryURL} SOURCE_REPOSITORY_BRANCH=${config.sourceRepositoryBranch} NODEJS_VERSION=${config.nodejsVersion} envLabel=${config.environment} HOST_NAME=${hostname} MIN_POD_REPLICAS=${minimumPodReplicas} MAX_POD_REPLICAS=${maximumPodReplicas} TARGET_PORT=${config.portNumber} NODEJS_PACKAGE_TAG=${config.package_tag} NODEJS_PACKAGE_TARBALL=${config.package_tarball} NODEJS_IS_SCOPED_PACKAGE=${config.is_scoped_package} ARTIFACTORY_NPM_REPO=${config.artifactoryNPMRepo} ARTIFACTORY_NPM_AUTH=${ARTIFACTORY_NPM_AUTH} ARTIFACTORY_NPM_EMAIL_AUTH=${ARTIFACTORY_NPM_EMAIL_AUTH}| oc create -n ${projectName} -f -"
             }
         }
