@@ -21,8 +21,8 @@ def call(body) {
     echo "config.is_scoped_package: ${config.is_scoped_package}"
     echo "config.portNumber: ${config.portNumber}"
     echo "config.artifactoryNPMRepo: ${config.artifactoryNPMRepo}"
-    echo "config.artifactoryNPMAuth${config.artifactoryNPMAuth}"
-    echo "config.artifactoryNPMEmailAuth${config.artifactoryNPMEmailAuth}"
+    echo "config.artifactoryNPMAuth: ${config.artifactoryNPMAuth}"
+    echo "config.artifactoryNPMEmailAuth: ${config.artifactoryNPMEmailAuth}"
 
 
     def packageJSON = readJSON file: 'package.json'
