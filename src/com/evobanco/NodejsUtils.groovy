@@ -65,18 +65,18 @@ def getPackageScope(String packageName) {
     return packageScope
 }
 
-def getPackageName(String packageName, boolean removeScope) {
-    def finalPackageName = ""
-    if (packageName == null || "".equals(packageName)) {
+def getUnscopedElement(String scopedElement) {
+    def unscopedElement = ""
+    if (scopedElement == null || "".equals(scopedElement)) {
         return ""
     } else {
-        if (removeScope) {
-            finalPackageName = packageName.substring(packageName.indexOf('/') + 1)
+        if (isScopedPackage(scopedElement)) {
+            unscopedElement = scopedElement.substring(scopedElement.indexOf('/') + 1)
         } else {
-            finalPackageName = packageName
+            throw new Exception("is not a scoped package")
         }
-        return finalPackageName
     }
+    return unscopedElement
 }
 
 def getPackageTag(String packageName, String packageVersion) {
