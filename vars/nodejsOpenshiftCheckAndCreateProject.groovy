@@ -46,7 +46,8 @@ def call(body) {
     if (isScopedPackage) {
         packageScope = utils.getPackageScope(packageJSON.name)
         echo "packageScope: ${packageScope}"
-        packageName = "${packageScope}-${packageJSON.name}"
+        def unscopedPackage = utils.getUnscopedElement(packageJSON.name)
+        packageName = "${packageScope}-${unscopedPackage}"
     } else {
         packageName = "${packageJSON.name}"
     }
