@@ -58,7 +58,7 @@ def boolean isScopedPackage(String packageName) {
 def getPackageScope(String packageName) {
     def packageScope = ""
     if (isScopedPackage(packageName)) {
-        packageScope = packageName.substring(packageName.indexOf('@'), packageName.indexOf('/'))
+        packageScope = packageName.substring(packageName.indexOf('@') + 1 , packageName.indexOf('/'))
     } else {
         throw new Exception("is not a scoped package")
     }
