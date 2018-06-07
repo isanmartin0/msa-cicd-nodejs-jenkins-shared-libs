@@ -65,6 +65,20 @@ def getPackageScope(String packageName) {
     return packageScope
 }
 
+def getPackageName(String packageName, boolean removeScope) {
+    def finalPackageName = ""
+    if (packageName == null || "".equals(packageName)) {
+        return ""
+    } else {
+        if (removeScope) {
+            finalPackageName = packageName.substring(packageName.indexOf('/') + 1)
+        } else {
+            finalPackageName = packageName
+        }
+        return finalPackageName
+    }
+}
+
 def getPackageTag(String packageName, String packageVersion) {
 
     def packageTag = ""
