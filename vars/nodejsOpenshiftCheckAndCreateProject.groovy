@@ -1,7 +1,9 @@
 #!/usr/bin/groovy
 import com.evobanco.NodejsConstants
+import com.evobanco.NodejsUtils
 
 def call(body) {
+    def utils = new com.evobanco.NodejsUtils()
     def config = [:]
     body.resolveStrategy = Closure.DELEGATE_FIRST
     body.delegate = config
@@ -32,8 +34,26 @@ def call(body) {
     int minimumPodReplicas = NodejsConstants.MINIMUM_POD_REPLICAS
     int maximumPodReplicas = NodejsConstants.MAXIMUM_POD_REPLICAS
     def hostname = ""
+
+    def isScopedPackage = false
+    def packageName = ""
+    def scope = ""
+
+    if (config.is_scoped_package) {
+        isScopedPackage = config.is_scoped_package.toBoolean()
+    }
+
+    if (isScopedPackage) {
+        packageScope = utils.getPackageScope(packageJSON.name)
+        echo "packageScope: ${packageScope}"
+        packageName = "${packageScope}-${packageJSON.name}"
+    } else {
+        packageName = "${packageJSON.name}"
+    }
+
+
     if (config.branch_type == 'master') {
-    	projectName = "${packageJSON.name}"
+    	projectName = "${packageName}"
 
         //Host name for the route element
         hostname = ".svcs" + NodejsConstants.HOSTNAME_DOMAIN
@@ -43,7 +63,7 @@ def call(body) {
         maximumPodReplicas = NodejsConstants.MAXIMUM_POD_REPLICAS_PRO_ENVIRONMENT
 
     } else {
-    	projectName = "${packageJSON.name}-${config.branchHY}"
+        projectName = "${packageName}-${config.branchHY}"
 
         //Branch name for image container
         branchNameContainerImage = "-${config.branchHY}"
