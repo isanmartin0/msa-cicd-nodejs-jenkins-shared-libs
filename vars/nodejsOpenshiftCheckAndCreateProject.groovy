@@ -39,7 +39,8 @@ def call(body) {
     def hostname = ""
 
 
-
+    echo "project: ${project}"
+    echo "projectName: ${projectName}"
 
     if (config.branch_type == 'master') {
         //Host name for the route element

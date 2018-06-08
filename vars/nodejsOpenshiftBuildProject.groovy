@@ -38,6 +38,9 @@ def call(body) {
     def project = utils.getProject(packageJSON.name)
     def projectName = utils.getProjectName(packageJSON.name, config.branch_type, config.branchHY)
 
+    echo "project: ${project}"
+    echo "projectName: ${projectName}"
+
     def version = packageJSON.version
 
 

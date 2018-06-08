@@ -9,9 +9,17 @@ def call(body) {
     body.delegate = config
     body()
 
+    echo "nodejsOpenshiftDeployProject parameters"
+
+    echo "config.branch_type: ${config.branch_type}"
+    echo "config.branchHY: ${config.branchHY}"
+
     def packageJSON = readJSON file: 'package.json'
     def project = utils.getProject(packageJSON.name)
-    def projectName = utils.getProjectName(packageJSON.name, config.branchType, config.branchNameHY)
+    def projectName = utils.getProjectName(packageJSON.name, config.branch_type, config.branchHY)
+
+    echo "project: ${project}"
+    echo "projectName: ${projectName}"
 
     openshiftDeploy deploymentConfig: project, namespace: projectName
 

@@ -51,6 +51,8 @@ def call(body) {
     def project = utils.getProject(packageJSON.name)
     def projectName = utils.getProjectName(packageJSON.name, branchType, branchNameHY)
 
+    echo "project: ${project}"
+    echo "projectName: ${projectName}"
 
     if (createPortEnvironmentVariable != null) {
         isCreatePortEnvironmentVariable = createPortEnvironmentVariable.toBoolean()
