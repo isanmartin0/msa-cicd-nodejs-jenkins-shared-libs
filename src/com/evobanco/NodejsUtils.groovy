@@ -126,7 +126,7 @@ def getPackageTag(String packageName, String packageVersion) {
     } else {
         packageTag = packageName.trim() + "@" + packageVersion.trim()
     }
-    return packageTag
+    return packageTag.toLowerCase()
 }
 
 def getPackageTarball(String packageName, String packageVersion) {
@@ -138,7 +138,7 @@ def getPackageTarball(String packageName, String packageVersion) {
     } else {
         packageTarball = packageName.trim() + "-" + packageVersion.trim() + tarballSufix
     }
-    return packageTarball
+    return packageTarball.toLowerCase()
 }
 
 
