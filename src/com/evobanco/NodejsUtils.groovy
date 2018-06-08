@@ -92,7 +92,7 @@ def getProject(String packageName) {
             project = packageName
         }
     }
-    return project
+    return project.toLowerCase()
 }
 
 def getProjectName(String packageName, String branchType, String branchHY) {
@@ -115,7 +115,7 @@ def getProjectName(String packageName, String branchType, String branchHY) {
             projectName = "${finalPackageName}-${branchHY}"
         }
     }
-    return projectName
+    return projectNameproject.toLowerCase()
 }
 
 def getPackageTag(String packageName, String packageVersion) {
