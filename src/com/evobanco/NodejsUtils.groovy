@@ -62,7 +62,7 @@ def getPackageScope(String packageName) {
     } else {
         throw new Exception("is not a scoped package")
     }
-    return packageScope
+    return packageScope.toLowerCase()
 }
 
 def getUnscopedElement(String scopedElement) {
@@ -76,7 +76,7 @@ def getUnscopedElement(String scopedElement) {
             throw new Exception("is not a scoped package")
         }
     }
-    return unscopedElement
+    return unscopedElement.toLowerCase()
 }
 
 def getProject(String packageName) {
@@ -151,7 +151,7 @@ def getPackageTarball(String packageTag) {
     } else {
         packageTarball = packageTag.trim().replace("@","-") + tarballSufix
     }
-    return packageTarball
+    return packageTarball.toLowerCase()
 }
 
 def getRouteHostnameWithProtocol(String routeHostname, boolean isSecuredRoute) {
