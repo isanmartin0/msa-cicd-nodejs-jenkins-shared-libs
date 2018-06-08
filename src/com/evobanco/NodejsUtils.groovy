@@ -79,6 +79,45 @@ def getUnscopedElement(String scopedElement) {
     return unscopedElement
 }
 
+def getProject(String packageName) {
+    def project = ""
+    if (packageName == null || "".equals(packageName)) {
+        return ""
+    } else {
+        if (isScopedPackage(packageName)) {
+            packageScope = getPackageScope(packageName)
+            def unscopedPackageName = getUnscopedElement(packageName)
+            project = "${packageScope}-${unscopedPackageName}"
+        } else {
+            project = packageName
+        }
+    }
+    return project
+}
+
+def getProjectName(String packageName, String branchType, String branchHY) {
+    def projectName = ""
+    if (packageName == null || "".equals(packageName) || branchType == null || "".equals(branchType)  || branchHY == null || "".equals(branchHY)) {
+        return ""
+    } else {
+        def finalPackageName = ""
+        if (isScopedPackage(packageName)) {
+            packageScope = getPackageScope(packageName)
+            def unscopedPackageName = getUnscopedElement(packageName)
+            finalPackageName = "${packageScope}-${unscopedPackageName}"
+        } else {
+            finalPackageName = packageName
+        }
+
+        if (branchType == 'master') {
+            projectName = "${finalPackageName}"
+        } else {
+            projectName = "${finalPackageName}-${branchHY}"
+        }
+    }
+    return projectName
+}
+
 def getPackageTag(String packageName, String packageVersion) {
 
     def packageTag = ""

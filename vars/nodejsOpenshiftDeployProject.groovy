@@ -1,20 +1,17 @@
 #!/usr/bin/groovy
+import com.evobanco.NodejsUtils
 
 def call(body) {
 
+    def utils = new com.evobanco.NodejsUtils()
     def config = [:]
     body.resolveStrategy = Closure.DELEGATE_FIRST
     body.delegate = config
     body()
 
     def packageJSON = readJSON file: 'package.json'
-    def project = "${packageJSON.name}"
-    def projectName
-    if (config.branch_type == 'master') {
-    	projectName = "${packageJSON.name}"
-    } else {
-    	projectName = "${packageJSON.name}-${config.branchHY}"
-    }
+    def project = utils.getProject(packageJSON.name)
+    def projectName = utils.getProjectName(packageJSON.name)
 
     openshiftDeploy deploymentConfig: project, namespace: projectName
 

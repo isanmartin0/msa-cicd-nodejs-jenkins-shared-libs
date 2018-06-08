@@ -28,34 +28,17 @@ def call(body) {
 
 
     def packageJSON = readJSON file: 'package.json'
-    def project = "${packageJSON.name}"
-    def projectName
+    def project = utils.getProject(packageJSON.name)
+    def projectName = utils.getProjectName(packageJSON.name)
     def branchNameContainerImage = ""
     int minimumPodReplicas = NodejsConstants.MINIMUM_POD_REPLICAS
     int maximumPodReplicas = NodejsConstants.MAXIMUM_POD_REPLICAS
     def hostname = ""
 
-    def isScopedPackage = false
-    def packageName = ""
-    def scope = ""
 
-    if (config.is_scoped_package) {
-        isScopedPackage = config.is_scoped_package.toBoolean()
-    }
-
-    if (isScopedPackage) {
-        packageScope = utils.getPackageScope(packageJSON.name)
-        echo "packageScope: ${packageScope}"
-        def unscopedPackage = utils.getUnscopedElement(packageJSON.name)
-        packageName = "${packageScope}-${unscopedPackage}"
-    } else {
-        packageName = "${packageJSON.name}"
-    }
 
 
     if (config.branch_type == 'master') {
-    	projectName = "${packageName}"
-
         //Host name for the route element
         hostname = ".svcs" + NodejsConstants.HOSTNAME_DOMAIN
 
@@ -64,8 +47,6 @@ def call(body) {
         maximumPodReplicas = NodejsConstants.MAXIMUM_POD_REPLICAS_PRO_ENVIRONMENT
 
     } else {
-        projectName = "${packageName}-${config.branchHY}"
-
         //Branch name for image container
         branchNameContainerImage = "-${config.branchHY}"
         //Host name for the route element
