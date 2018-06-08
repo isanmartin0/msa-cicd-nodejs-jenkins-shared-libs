@@ -11,7 +11,7 @@ def call(body) {
 
     def packageJSON = readJSON file: 'package.json'
     def project = utils.getProject(packageJSON.name)
-    def projectName = utils.getProjectName(packageJSON.name)
+    def projectName = utils.getProjectName(packageJSON.name, config.branchType, config.branchNameHY)
 
     openshiftDeploy deploymentConfig: project, namespace: projectName
 

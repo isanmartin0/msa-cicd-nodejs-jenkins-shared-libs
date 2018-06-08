@@ -12,6 +12,7 @@ def call(body) {
     echo "nodejsOpenshiftCheckAndCreateProject parameters"
     echo "config.template: ${config.template}"
     echo "config.environment: ${config.environment}"
+    echo "config.branch_type: ${config.branch_type}"
     echo "config.branchHY: ${config.branchHY}"
     echo "config.dockerRegistry: ${config.dockerRegistry}"
     echo "config.sourceRepositoryURL: ${config.sourceRepositoryURL}"
@@ -27,9 +28,11 @@ def call(body) {
     echo "config.artifactoryNPMEmailAuth: ${config.artifactoryNPMEmailAuth}"
 
 
+
+
     def packageJSON = readJSON file: 'package.json'
     def project = utils.getProject(packageJSON.name)
-    def projectName = utils.getProjectName(packageJSON.name)
+    def projectName = utils.getProjectName(packageJSON.name, config.branch_type, config.branchHY)
     def branchNameContainerImage = ""
     int minimumPodReplicas = NodejsConstants.MINIMUM_POD_REPLICAS
     int maximumPodReplicas = NodejsConstants.MAXIMUM_POD_REPLICAS

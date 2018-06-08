@@ -12,6 +12,8 @@ def call(body) {
 
     echo "nodejsOpenshiftBuildProject parameters"
 
+    echo "config.branch_type:  ${config.branch_type}"
+    echo "config.branchHY:  ${config.branchHY}"
     echo "config.devModeOpenshift:  ${config.devModeOpenshift}"
     echo "config.debugPortOpenshift:  ${config.debugPortOpenshift}"
     echo "config.useNpmMirrorOpenshift:  ${config.useNpmMirrorOpenshift}"
@@ -34,7 +36,7 @@ def call(body) {
 
     def packageJSON = readJSON file: 'package.json'
     def project = utils.getProject(packageJSON.name)
-    def projectName = utils.getProjectName(packageJSON.name)
+    def projectName = utils.getProjectName(packageJSON.name, config.branch_type, config.branchHY)
 
     def version = packageJSON.version
 

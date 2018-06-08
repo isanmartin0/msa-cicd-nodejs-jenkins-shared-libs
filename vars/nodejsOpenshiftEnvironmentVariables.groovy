@@ -49,7 +49,7 @@ def call(body) {
 
     def packageJSON = readJSON file: 'package.json'
     def project = utils.getProject(packageJSON.name)
-    def projectName = utils.getProjectName(packageJSON.name)
+    def projectName = utils.getProjectName(packageJSON.name, branchType, branchNameHY)
 
 
     if (createPortEnvironmentVariable != null) {
