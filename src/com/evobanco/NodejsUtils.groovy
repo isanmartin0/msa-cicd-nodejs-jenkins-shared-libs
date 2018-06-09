@@ -136,7 +136,13 @@ def getPackageTarball(String packageName, String packageVersion) {
     if (packageName == null || "".equals(packageName) || packageVersion == null || "".equals(packageVersion)) {
         return ""
     } else {
-        packageTarball = packageName.trim() + "-" + packageVersion.trim() + tarballSufix
+        if (isScopedPackage(packageName)) {
+            packageScope = getPackageScope(packageName)
+            def unscopedPackageName = getUnscopedElement(packageName)
+            packageTarball = packageScope + "-" + unscopedPackageName.trim() + "-" + packageVersion.trim() + tarballSufix
+        } else {
+            packageTarball = packageName.trim() + "-" + packageVersion.trim() + tarballSufix
+        }
     }
     return packageTarball.toLowerCase()
 }
