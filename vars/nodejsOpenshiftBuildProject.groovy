@@ -59,8 +59,8 @@ def call(body) {
 
 
 
-    def artifactUrl = "${config.repoUrl}/${packageJSON.name}/${version}/${packageJSON.name}-${version}.tgz"
-    def buildEnvVars = [ [ name : 'WAR_FILE_URL', value : artifactUrl ]]
+    //def artifactUrl = "${config.repoUrl}/${packageJSON.name}/${version}/${packageJSON.name}-${version}.tgz"
+    def buildEnvVars = []
 
 
     echo "buildEnvVars.size: ${buildEnvVars.size()}"
@@ -82,7 +82,7 @@ def call(body) {
 
     openshiftBuild buildConfig: project, namespace: projectName, verbose: 'true', showBuildLogs: 'true', env: buildEnvVars
 
-    def destTag = "${packageJSON.name}-${version}"
+    def destTag = "${project}-${version}"
 
     openshiftTag(namespace: projectName, sourceStream: project, sourceTag: 'latest', destinationStream: project, destinationTag: destTag)
 }
