@@ -62,7 +62,7 @@ def getPackageScope(String packageName) {
     } else {
         throw new Exception("is not a scoped package")
     }
-    return packageScope.toLowerCase()
+    return packageScope.toLowerCase().trim()
 }
 
 def getUnscopedElement(String scopedElement) {
@@ -76,7 +76,7 @@ def getUnscopedElement(String scopedElement) {
             throw new Exception("is not a scoped package")
         }
     }
-    return unscopedElement.toLowerCase()
+    return unscopedElement.toLowerCase().trim()
 }
 
 def getProject(String packageName) {
@@ -92,7 +92,7 @@ def getProject(String packageName) {
             project = packageName
         }
     }
-    return project.toLowerCase()
+    return project.toLowerCase().trim()
 }
 
 def getProjectName(String packageName, String branchType, String branchHY) {
@@ -115,7 +115,7 @@ def getProjectName(String packageName, String branchType, String branchHY) {
             projectName = "${finalPackageName}-${branchHY}"
         }
     }
-    return projectName.toLowerCase()
+    return projectName.toLowerCase().trim()
 }
 
 def getPackageTag(String packageName, String packageVersion) {
@@ -126,7 +126,7 @@ def getPackageTag(String packageName, String packageVersion) {
     } else {
         packageTag = packageName.trim() + "@" + packageVersion.trim()
     }
-    return packageTag.toLowerCase()
+    return packageTag.toLowerCase().trim()
 }
 
 def getPackageTarball(String packageName, String packageVersion) {
@@ -144,9 +144,8 @@ def getPackageTarball(String packageName, String packageVersion) {
             packageTarball = packageName.trim() + "-" + packageVersion.trim() + tarballSufix
         }
     }
-    return packageTarball.toLowerCase()
+    return packageTarball.toLowerCase().trim()
 }
-
 
 def getPackageTarball(String packageTag) {
 
@@ -157,7 +156,23 @@ def getPackageTarball(String packageTag) {
     } else {
         packageTarball = packageTag.trim().replace("@","-") + tarballSufix
     }
-    return packageTarball.toLowerCase()
+    return packageTarball.toLowerCase().trim()
+}
+
+def packageViewTarball(String packageName, String packageVersion) {
+
+    def packageViewTarball = ""
+    def tarballSufix = ".tgz"
+    if (packageName == null || "".equals(packageName) || packageVersion == null || "".equals(packageVersion)) {
+        return ""
+    } else {
+        if (isScopedPackage(packageName)) {
+            packageViewTarball = packageName + "-" + packageVersion.trim() + tarballSufix
+        } else {
+            packageViewTarball = getPackageTarball(packageName, packageVersion)
+        }
+    }
+    return packageViewTarball.toLowerCase().trim()
 }
 
 def getRouteHostnameWithProtocol(String routeHostname, boolean isSecuredRoute) {
