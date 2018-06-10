@@ -159,7 +159,7 @@ def getPackageTarball(String packageTag) {
     return packageTarball.toLowerCase().trim()
 }
 
-def packageViewTarball(String packageName, String packageVersion) {
+def getPackageViewTarball(String packageName, String packageVersion) {
 
     def packageViewTarball = ""
     def tarballSufix = ".tgz"
