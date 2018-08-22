@@ -193,13 +193,12 @@ def getRouteHostnameWithProtocol(String routeHostname, boolean isSecuredRoute) {
     return routeHostNameWithProtocol
 }
 
-def String getBuildCredentialsId(String project, String buildCredentialsId) {
-
+def String getBuildCredentialsId(String projectName, String buildCredentialsId) {
     def build_extension = "-build";
     def credentialsId = ""
 
     if (buildCredentialsId != null && !"".equals(buildCredentialsId)) {
-        credentialsId = project + build_extension
+        credentialsId = projectName + build_extension
     } else {
         credentialsId = buildCredentialsId
     }
