@@ -76,8 +76,7 @@ def call(body) {
         sh "oc policy add-role-to-user edit system:serviceaccount:${config.jenkinsNS}:jenkins -n ${projectName}"
 
         sh "oc project ${projectName}"
-        echo "sourceprivatekey: ##${config.sourceprivatekey}##"
-        if (config.sourceprivatekey != '') {
+        if (config.sourceprivatekey != '' && config.sourceprivatekey != null) {
 		withCredentials([
 		    string(credentialsId: "${config.artifactoryNPMAuth}", variable: 'ARTIFACTORY_NPM_AUTH'), 
 		    string(credentialsId: "${config.artifactoryNPMEmailAuth}", variable: 'ARTIFACTORY_NPM_EMAIL_AUTH'),

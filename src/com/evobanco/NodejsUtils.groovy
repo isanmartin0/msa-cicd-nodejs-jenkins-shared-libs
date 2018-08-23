@@ -208,4 +208,3 @@ def getBuildCredentialsId(String projectName, String buildCredentialsId, boolean
     def credentialsId = buildCredentialsId ?: projectName+build_extension
     return ( isPrivate && stringCredentialsExist(credentialsId))? credentialsId : ''
 }
-
