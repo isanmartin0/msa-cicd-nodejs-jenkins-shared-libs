@@ -206,5 +206,8 @@ boolean stringCredentialsExist(String id) {
 def getBuildCredentialsId(String projectName, String buildCredentialsId, boolean isPrivate) {
     def build_extension = "-build";
     def credentialsId = buildCredentialsId ?: projectName+build_extension
+    print "credentialsId: "+credentialsId
+    print "isPrivate:" "isPrivate
+    print "stringCredentialsExist(credentialsId): "+stringCredentialsExist(credentialsId)
     return ( isPrivate && stringCredentialsExist(credentialsId))? credentialsId : ''
 }
