@@ -206,5 +206,5 @@ boolean stringCredentialsExist(String id) {
 def getBuildCredentialsId(String projectName, String buildCredentialsId, boolean isPrivate) {
     def build_extension = "-build";
     def credentialsId = buildCredentialsId ?: projectName+build_extension
-    return ( isPrivate && stringCredentialsExist(credentialsId))? credentialsId : ''
+    return ( isPrivate && stringCredentialsExist(credentialsId))? credentialsId : NodejsConstants.DEFAULT_PUBLIC_SECRET_SSH
 }
