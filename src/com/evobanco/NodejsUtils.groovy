@@ -192,3 +192,19 @@ def getRouteHostnameWithProtocol(String routeHostname, boolean isSecuredRoute) {
 
     return routeHostNameWithProtocol
 }
+
+boolean stringCredentialsExist(String id) {
+  try {
+    withCredentials([string(credentialsId: id, variable: 'irrelevant')]) {
+      true
+    }
+  } catch (_) {
+    false
+  }
+}
+
+def getBuildCredentialsId(String projectName, String buildCredentialsId, boolean isPrivate) {
+    def build_extension = "-build";
+    def credentialsId = buildCredentialsId ?: projectName+build_extension
+    return ( isPrivate && stringCredentialsExist(credentialsId))? credentialsId : NodejsConstants.DEFAULT_PUBLIC_SECRET_SSH
+}

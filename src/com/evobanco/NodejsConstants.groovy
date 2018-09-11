@@ -38,7 +38,7 @@ class NodejsConstants {
     static final NPM_MIRROR_ENVIRONMENT_VARIABLE = 'NPM_MIRROR'
     static final DEBUG_PORT_ENVIRONMENT_VARIABLE = 'DEBUG_PORT'
 
-
+    static final DEFAULT_PUBLIC_SECRET_SSH = 'default-public-secret'
 
 
 }
